@@ -26,7 +26,7 @@ namespace ServisAuto.domain.Entities
 
         //navigation properties
 
-       // public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
         
     }
 }

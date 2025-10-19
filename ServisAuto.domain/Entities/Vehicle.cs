@@ -29,6 +29,6 @@ namespace ServisAuto.domain.Entities
 
         //Navigation properties
         public User User { get; set; } = null!;
-       // public ICollection<Resirvation> Resirvations { get; set; } = new List<Resirvation>();
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }

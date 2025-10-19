@@ -29,6 +29,6 @@ namespace ServisAuto.domain.Entities
         //Navigation properties
         //TODO odkemntiraj kada uvedemo ove klase
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
-      //  public ICollection<Resirvation> Resirvations { get; set; } = new List<Resirvation>();
+       public ICollection<Reservation> Resirvations { get; set; } = new List<Reservation>();
     }
 }
