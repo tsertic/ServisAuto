@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.21" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ServisAuto.Application\ServisAuto.Application.csproj" />
     <ProjectReference Include="..\ServisAuto.domain\ServisAuto.domain.csproj" />
   </ItemGroup>
