@@ -1,0 +1,63 @@
+-- ==========================
+-- USERS TABLE
+-- ==========================
+CREATE TABLE Users (
+    UserId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    FirstName NVARCHAR(100) NOT NULL,
+    LastName NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(MAX) NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    Role NVARCHAR(20) NOT NULL, -- 'Customer', 'Servicer', 'Admin'
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1
+);
+
+-- ==========================
+-- VEHICLES TABLE
+-- ==========================
+CREATE TABLE Vehicles (
+    VehicleId INT PRIMARY KEY IDENTITY(1,1),
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    LicensePlate NVARCHAR(20) NOT NULL,
+    Brand NVARCHAR(50) NOT NULL,
+    Model NVARCHAR(50) NOT NULL,
+    Year INT NOT NULL,
+    VIN NVARCHAR(17),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+);
+
+-- ==========================
+-- SERVICES TABLE
+-- ==========================
+CREATE TABLE Services (
+    ServiceId INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Description NVARCHAR(500),
+    Price DECIMAL(10,2) NOT NULL,
+    DurationMinutes INT NOT NULL,
+    IsActive BIT DEFAULT 1,
+    CreatedAt DATETIME2 DEFAULT GETDATE()
+);
+
+-- ==========================
+-- RESERVATIONS TABLE
+-- ==========================
+CREATE TABLE Reservations (
+    ReservationId INT PRIMARY KEY IDENTITY(1,1),
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    VehicleId INT NOT NULL,
+    ServiceId INT NOT NULL,
+    ReservationDateTime DATETIME2 NOT NULL,
+    Status NVARCHAR(20) NOT NULL, -- 'Pending', 'Confirmed', 'Rejected', 'Completed', 'Cancelled'
+    CustomerNote NVARCHAR(500),
+    ServicerNote NVARCHAR(500),
+    HandledByUserId UNIQUEIDENTIFIER,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    FOREIGN KEY (VehicleId) REFERENCES Vehicles(VehicleId),
+    FOREIGN KEY (ServiceId) REFERENCES Services(ServiceId),
+    FOREIGN KEY (HandledByUserId) REFERENCES Users(UserId)
+);

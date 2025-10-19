@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServisAuto.domain.Entities
 {
-    internal class User
+    public class User
     {
         //PK
         public Guid UserId { get; set; }
@@ -28,7 +28,7 @@ namespace ServisAuto.domain.Entities
 
         //Navigation properties
         //TODO odkemntiraj kada uvedemo ove klase
-      //  public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+        public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
       //  public ICollection<Resirvation> Resirvations { get; set; } = new List<Resirvation>();
     }
 }
